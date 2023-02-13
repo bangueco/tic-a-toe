@@ -109,3 +109,9 @@ function enableBoxes() {
     boxes[listOfNodes].classList.remove("disabled");
   }
 }
+
+function clearBox() {
+  for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
+    boxes[listOfNodes].textContent = "";
+  }
+}
