@@ -19,6 +19,7 @@ let c1 = document.querySelector("#c-1");
 let c2 = document.querySelector("#c-2");
 let c3 = document.querySelector("#c-3");
 
+let buttons = document.querySelectorAll(".btns");
 let boxes = document.querySelectorAll(".box");
 let results = document.querySelector("#results");
 
@@ -125,11 +126,21 @@ function disableBoxes() {
   for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
     boxes[listOfNodes].classList.add("disabled");
   }
+
+  for (let btns = 0; btns < buttons.length; btns++) {
+    buttons[btns].classList.remove("not-visible");
+    buttons[btns].classList.add("visible");
+  }
 }
 
 function enableBoxes() {
   for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
     boxes[listOfNodes].classList.remove("disabled");
+  }
+
+  for (let btns = 0; btns < buttons.length; btns++) {
+    buttons[btns].classList.add("not-visible");
+    buttons[btns].classList.remove("visible");
   }
 }
 
@@ -137,4 +148,5 @@ function clearBoxes() {
   for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
     boxes[listOfNodes].textContent = "";
   }
+  results.textContent = "";
 }
