@@ -6,6 +6,9 @@
 let player_x = 1;
 let player_o = 0;
 
+let player_x_score = 0;
+let player_o_score = 0;
+
 // Queries
 let a1 = document.querySelector("#a-1");
 let a2 = document.querySelector("#a-2");
@@ -22,6 +25,9 @@ let c3 = document.querySelector("#c-3");
 let buttons = document.querySelectorAll(".btns");
 let boxes = document.querySelectorAll(".box");
 let results = document.querySelector("#results");
+
+let playerXScore = document.querySelector("#player_x_score");
+let playerOScore = document.querySelector("#player_o_score");
 
 function playerMoveX(move) {
   player_x = move;
@@ -51,68 +57,100 @@ function clickBox(move) {
   playerTurns(move);
 
   if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
+    player_x_score++;
+    playerXScore.textContent = `Player X Score: ${player_x_score}`;
     results.textContent = "Player X Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
+    player_o_score++;
+    playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
-    alert("WORKS");
+    /*alert("WORKS");*/
     disableBoxes();
   }
 }
