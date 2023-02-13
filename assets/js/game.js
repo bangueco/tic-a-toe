@@ -103,3 +103,9 @@ function disableBoxes() {
     boxes[listOfNodes].classList.add("disabled");
   }
 }
+
+function enableBoxes() {
+  for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
+    boxes[listOfNodes].classList.remove("disabled");
+  }
+}
