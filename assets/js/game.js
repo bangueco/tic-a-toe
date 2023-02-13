@@ -6,7 +6,7 @@
 let player_x = 1;
 let player_o = 0;
 
-let tieCounter = 0;
+let moveCounter = 0;
 
 let player_x_score = 0;
 let player_ties_score = 0;
@@ -158,7 +158,7 @@ function clickBox(move) {
     results.textContent = "Player O Won!";
     /*alert("WORKS");*/
     disableBoxes();
-  } else if (tieCounter === 9) {
+  } else if (moveCounter === 9) {
     player_ties_score++;
     playerTiesScore.textContent = `Ties: ${player_ties_score}`;
     results.textContent = "It's a tie!";
@@ -166,7 +166,24 @@ function clickBox(move) {
   }
 }
 
-function resetBoxes() {
+function restartGame() {
+  player_x_score = 0;
+  player_ties_score = 0;
+  player_o_score = 0;
+  moveCounter = 0;
+  playerXScore.textContent = `Player X Score: ${player_x_score}`;
+  playerTiesScore.textContent = `Ties: ${player_ties_score}`;
+  playerOScore.textContent = `Player O Score: ${player_o_score}`;
+  playerMoveX(1);
+  playerMoveO(0);
+  enableBoxes();
+  clearBoxes();
+}
+
+function continuePlaying() {
+  playerMoveX(1);
+  playerMoveO(0);
+  moveCounter = 0;
   enableBoxes();
   clearBoxes();
 }
