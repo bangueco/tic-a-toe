@@ -20,6 +20,8 @@ let c2 = document.querySelector("#c-2");
 let c3 = document.querySelector("#c-3");
 
 let boxes = document.querySelectorAll(".box");
+let results = document.querySelector("#results");
+
 function playerMoveX(move) {
   player_x = move;
 }
@@ -48,51 +50,67 @@ function clickBox(move) {
   playerTurns(move);
 
   if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
+    results.textContent = "Player X Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
+    results.textContent = "Player O Won!";
     alert("WORKS");
     disableBoxes();
   }
