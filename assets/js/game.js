@@ -98,6 +98,11 @@ function clickBox(move) {
   }
 }
 
+function resetBoxes() {
+  enableBoxes();
+  clearBoxes();
+}
+
 function disableBoxes() {
   for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
     boxes[listOfNodes].classList.add("disabled");
@@ -110,7 +115,7 @@ function enableBoxes() {
   }
 }
 
-function clearBox() {
+function clearBoxes() {
   for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
     boxes[listOfNodes].textContent = "";
   }
