@@ -7,6 +7,7 @@ let player_x = 1;
 let player_o = 0;
 
 let player_x_score = 0;
+let player_ties_score = 0;
 let player_o_score = 0;
 
 // Queries
@@ -27,6 +28,7 @@ let boxes = document.querySelectorAll(".box");
 let results = document.querySelector("#results");
 
 let playerXScore = document.querySelector("#player_x_score");
+let playerTiesScore = document.querySelector("#player_ties_score");
 let playerOScore = document.querySelector("#player_o_score");
 
 function playerMoveX(move) {
