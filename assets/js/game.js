@@ -6,6 +6,8 @@
 let player_x = 1;
 let player_o = 0;
 
+let tieCounter = 0;
+
 let player_x_score = 0;
 let player_ties_score = 0;
 let player_o_score = 0;
@@ -44,12 +46,14 @@ function playerTurns(move) {
     // Player X always goes first
     move.textContent = "X";
     move.classList.add("disabled");
+    tieCounter++;
     playerMoveX(0); // Disables player x move
     playerMoveO(1); // Enables player o move
   } else {
     // Player O always second
     move.textContent = "O";
     move.classList.add("disabled");
+    tieCounter++;
     playerMoveX(1); // Enables player x move
     playerMoveO(0); // Disables player o move
   }
@@ -153,6 +157,11 @@ function clickBox(move) {
     playerOScore.textContent = `Player O Score: ${player_o_score}`;
     results.textContent = "Player O Won!";
     /*alert("WORKS");*/
+    disableBoxes();
+  } else if (tieCounter === 9) {
+    player_ties_score++;
+    playerTiesScore.textContent = `Ties: ${player_ties_score}`;
+    results.textContent = "It's a tie!";
     disableBoxes();
   }
 }
