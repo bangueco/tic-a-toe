@@ -123,7 +123,7 @@ function resetBoxes() {
 }
 
 function disableBoxes() {
-  for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
+  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
     boxes[listOfNodes].classList.add("disabled");
   }
 
@@ -134,7 +134,7 @@ function disableBoxes() {
 }
 
 function enableBoxes() {
-  for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
+  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
     boxes[listOfNodes].classList.remove("disabled");
   }
 
@@ -145,7 +145,7 @@ function enableBoxes() {
 }
 
 function clearBoxes() {
-  for (let listOfNodes = 0; listOfNodes <= 8; listOfNodes++) {
+  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
     boxes[listOfNodes].textContent = "";
   }
   results.textContent = "";
