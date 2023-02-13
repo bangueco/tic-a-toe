@@ -46,14 +46,14 @@ function playerTurns(move) {
     // Player X always goes first
     move.textContent = "X";
     move.classList.add("disabled");
-    tieCounter++;
+    moveCounter++;
     playerMoveX(0); // Disables player x move
     playerMoveO(1); // Enables player o move
   } else {
     // Player O always second
     move.textContent = "O";
     move.classList.add("disabled");
-    tieCounter++;
+    moveCounter++;
     playerMoveX(1); // Enables player x move
     playerMoveO(0); // Disables player o move
   }
