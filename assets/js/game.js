@@ -31,13 +31,13 @@ function playerTurns(move) {
   if (player_x == 1 && player_o == 0) {
     // Player X always goes first
     move.textContent = "X";
-    move.classList.add("disable-buttons");
+    move.classList.add("disabled");
     playerMoveX(0); // Disables player x move
     playerMoveO(1); // Enables player o move
   } else {
     // Player O always second
     move.textContent = "O";
-    move.classList.add("disable-buttons");
+    move.classList.add("disabled");
     playerMoveX(1); // Enables player x move
     playerMoveO(0); // Disables player o move
   }
@@ -45,4 +45,38 @@ function playerTurns(move) {
 
 function clickBox(move) {
   playerTurns(move);
+
+  if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
+    alert("WORKS");
+  } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
+    alert("WORKS");
+  } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
+    alert("WORKS");
+  } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
+    alert("WORKS");
+  } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
+    alert("WORKS");
+  } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
+    alert("WORKS");
+  } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
+    alert("WORKS");
+  } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
+    alert("WORKS"); // X
+  } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
+    alert("WORKS");
+  } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
+    alert("WORKS");
+  } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
+    alert("WORKS");
+  } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
+    alert("WORKS");
+  } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
+    alert("WORKS");
+  } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
+    alert("WORKS");
+  } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
+    alert("WORKS");
+  } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
+    alert("WORKS");
+  }
 }
