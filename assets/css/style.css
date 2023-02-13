@@ -70,3 +70,11 @@ header > div {
   pointer-events: none;
   opacity: 0.4;
 }
+
+.btns {
+  padding: 8px 12px;
+}
+
+.not-visible {
+  display: none;
+}
