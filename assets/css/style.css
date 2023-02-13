@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+header > div {
+  font-size: 50px;
+}
+
+.tic-a-toe-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 650px;
+  border: 1px solid red;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  border: 1px solid black;
+  width: 170px;
+  height: 160px;
+  cursor: pointer;
+}
+
+.scores-container {
+  display: flex;
+  gap: 150px;
+  padding: 20px;
+}
+
+#a-1,
+#b-1,
+#c-1 {
+  border-right: none;
+}
+
+#a-3,
+#b-3,
+#c-3 {
+  border-left: none;
+}
+
+#row-a,
+#row-b,
+#row-c {
+  display: flex;
+}
+
+#results {
+  padding: 10px;
+}
+
+#buttons {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+}
