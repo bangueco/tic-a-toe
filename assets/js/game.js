@@ -33,34 +33,28 @@ let playerXScore = document.querySelector("#player_x_score");
 let playerTiesScore = document.querySelector("#player_ties_score");
 let playerOScore = document.querySelector("#player_o_score");
 
-function playerMoveX(move) {
-  player_x = move;
-}
-
-function playerMoveO(move) {
-  player_o = move;
-}
-
 function playerTurns(move) {
   if (player_x == 1 && player_o == 0) {
     // Player X always goes first
     move.textContent = "X";
     move.classList.add("disabled");
     moveCounter++;
-    playerMoveX(0); // Disables player x move
-    playerMoveO(1); // Enables player o move
+    player_x = 0; // Disables player x move
+    player_o = 1; // Enables player o move
   } else {
     // Player O always second
     move.textContent = "O";
     move.classList.add("disabled");
     moveCounter++;
-    playerMoveX(1); // Enables player x move
-    playerMoveO(0); // Disables player o move
+    player_x = 1; // Enables player x move
+    player_o = 0; // Disables player o move
   }
 }
 
 function clickBox(move) {
-  playerTurns(move);
+  // in this function if move == a1
+
+  playerTurns(move); // this will be playerTurns(a1)
 
   if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
     player_x_score++;
@@ -158,7 +152,7 @@ function clickBox(move) {
     results.textContent = "Player O Won!";
     /*alert("WORKS");*/
     disableBoxes();
-  } else if (moveCounter === 9) {
+  } else if (moveCounter === boxes.length) {
     player_ties_score++;
     playerTiesScore.textContent = `Ties: ${player_ties_score}`;
     results.textContent = "It's a tie!";
@@ -174,15 +168,15 @@ function restartGame() {
   playerXScore.textContent = `Player X Score: ${player_x_score}`;
   playerTiesScore.textContent = `Ties: ${player_ties_score}`;
   playerOScore.textContent = `Player O Score: ${player_o_score}`;
-  playerMoveX(1);
-  playerMoveO(0);
+  player_x = 1;
+  player_o = 0;
   enableBoxes();
   clearBoxes();
 }
 
 function continuePlaying() {
-  playerMoveX(1);
-  playerMoveO(0);
+  player_x = 1;
+  player_o = 0;
   moveCounter = 0;
   enableBoxes();
   clearBoxes();
