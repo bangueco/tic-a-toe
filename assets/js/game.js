@@ -13,17 +13,6 @@ let player_ties_score = 0;
 let player_o_score = 0;
 
 // Queries
-let a1 = document.querySelector("#a-1");
-let a2 = document.querySelector("#a-2");
-let a3 = document.querySelector("#a-3");
-
-let b1 = document.querySelector("#b-1");
-let b2 = document.querySelector("#b-2");
-let b3 = document.querySelector("#b-3");
-
-let c1 = document.querySelector("#c-1");
-let c2 = document.querySelector("#c-2");
-let c3 = document.querySelector("#c-3");
 
 let buttons = document.querySelectorAll(".btns");
 let boxes = document.querySelectorAll(".box");
@@ -51,113 +40,81 @@ function playerTurns(move) {
   }
 }
 
-function clickBox(move) {
-  // in this function if move == a1
+boxes.forEach((box) =>
+  box.addEventListener("click", (move) => {
+    playerTurns(move.target);
 
-  playerTurns(move); // this will be playerTurns(a1)
+    if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
+      winnerPlayerX();
+      disableBoxes();
+    } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
+      winnerPlayerO();
+      disableBoxes();
+    } else if (moveCounter === boxes.length) {
+      winnerNone();
+      disableBoxes();
+    }
+  })
+);
 
-  if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
-    player_x_score++;
-    playerXScore.textContent = `Player X Score: ${player_x_score}`;
-    results.textContent = "Player X Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
-    player_o_score++;
-    playerOScore.textContent = `Player O Score: ${player_o_score}`;
-    results.textContent = "Player O Won!";
-    /*alert("WORKS");*/
-    disableBoxes();
-  } else if (moveCounter === boxes.length) {
-    player_ties_score++;
-    playerTiesScore.textContent = `Ties: ${player_ties_score}`;
-    results.textContent = "It's a tie!";
-    disableBoxes();
-  }
+function winnerPlayerX() {
+  player_x_score++;
+  playerXScore.textContent = `Player X Score: ${player_x_score}`;
+  results.textContent = "Player X Won!";
+}
+
+function winnerPlayerO() {
+  player_o_score++;
+  playerOScore.textContent = `Player O Score: ${player_o_score}`;
+  results.textContent = "Player O Won!";
+}
+
+function winnerNone() {
+  player_ties_score++;
+  playerTiesScore.textContent = `Ties: ${player_ties_score}`;
+  results.textContent = "It's a tie!";
 }
 
 function restartGame() {
