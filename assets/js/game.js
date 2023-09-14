@@ -1,169 +1,72 @@
-/* Default Player Turns
-0 = disable
-1 = enable
-*/
+const Player = (marker, isTurn) => {
+  let score = 0;
 
-let player_x = 1;
-let player_o = 0;
+  return {
+    score,
+    marker,
+    isTurn,
+  };
+};
 
-let moveCounter = 0;
+const GameBoard = (() => {
+  const _playerOne = Player("X", true);
+  const _playerTwo = Player("O", false);
 
-let player_x_score = 0;
-let player_ties_score = 0;
-let player_o_score = 0;
+  const _winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 5],
+  ];
 
-// Queries
+  const _board = ["", "", "", "", "", "", "", "", ""];
 
-let buttons = document.querySelectorAll(".btns");
-let boxes = document.querySelectorAll(".box");
-let results = document.querySelector("#results");
-
-let playerXScore = document.querySelector("#player_x_score");
-let playerTiesScore = document.querySelector("#player_ties_score");
-let playerOScore = document.querySelector("#player_o_score");
-
-function playerTurns(move) {
-  if (player_x == 1 && player_o == 0) {
-    // Player X always goes first
-    move.textContent = "X";
-    move.classList.add("disabled");
-    moveCounter++;
-    player_x = 0; // Disables player x move
-    player_o = 1; // Enables player o move
-  } else {
-    // Player O always second
-    move.textContent = "O";
-    move.classList.add("disabled");
-    moveCounter++;
-    player_x = 1; // Enables player x move
-    player_o = 0; // Disables player o move
-  }
-}
-
-boxes.forEach((box) =>
-  box.addEventListener("click", (move) => {
-    playerTurns(move.target);
-
-    if (a1.textContent == "X" && a2.textContent == "X" && a3.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (b1.textContent == "X" && b2.textContent == "X" && b3.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (c1.textContent == "X" && c2.textContent == "X" && c3.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a1.textContent == "X" && b1.textContent == "X" && c1.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a2.textContent == "X" && b2.textContent == "X" && c2.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a3.textContent == "X" && b3.textContent == "X" && c3.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a1.textContent == "X" && b2.textContent == "X" && c3.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a3.textContent == "X" && b2.textContent == "X" && c1.textContent == "X") {
-      winnerPlayerX();
-      disableBoxes();
-    } else if (a1.textContent == "O" && a2.textContent == "O" && a3.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (b1.textContent == "O" && b2.textContent == "O" && b3.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (c1.textContent == "O" && c2.textContent == "O" && c3.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (a1.textContent == "O" && b1.textContent == "O" && c1.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (a2.textContent == "O" && b2.textContent == "O" && c2.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (a3.textContent == "O" && b3.textContent == "O" && c3.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (a1.textContent == "O" && b2.textContent == "O" && c3.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (a3.textContent == "O" && b2.textContent == "O" && c1.textContent == "O") {
-      winnerPlayerO();
-      disableBoxes();
-    } else if (moveCounter === boxes.length) {
-      winnerNone();
-      disableBoxes();
+  const _placeMarker = (box) => {
+    if (_playerOne.isTurn === true) {
+      _board[box.dataset.row] = _playerOne.marker;
+      box.textContent = _playerOne.marker;
+      _playerOne.isTurn = false;
+      _playerTwo.isTurn = true;
+    } else {
+      _board[box.dataset.row] = _playerTwo.marker;
+      box.textContent = _playerTwo.marker;
+      _playerOne.isTurn = true;
+      _playerTwo.isTurn = false;
     }
-  })
-);
+  };
 
-function winnerPlayerX() {
-  player_x_score++;
-  playerXScore.textContent = `Player X Score: ${player_x_score}`;
-  results.textContent = "Player X Won!";
-}
+  const _checkForWinner = () => {
+    for (let x = 0; x <= _winningConditions.length - 1; x++) {
+      const condition = _winningConditions[x];
+      const rowA = _board[condition[0]];
+      const rowB = _board[condition[1]];
+      const rowC = _board[condition[2]];
 
-function winnerPlayerO() {
-  player_o_score++;
-  playerOScore.textContent = `Player O Score: ${player_o_score}`;
-  results.textContent = "Player O Won!";
-}
+      if (rowA == "" || rowB == "" || rowC == "") {
+        continue;
+      }
 
-function winnerNone() {
-  player_ties_score++;
-  playerTiesScore.textContent = `Ties: ${player_ties_score}`;
-  results.textContent = "It's a tie!";
-}
+      if (rowA === rowB && rowB === rowC) {
+        alert("Yes?");
+        break;
+      }
+    }
+  };
 
-function restartGame() {
-  player_x_score = 0;
-  player_ties_score = 0;
-  player_o_score = 0;
-  moveCounter = 0;
-  playerXScore.textContent = `Player X Score: ${player_x_score}`;
-  playerTiesScore.textContent = `Ties: ${player_ties_score}`;
-  playerOScore.textContent = `Player O Score: ${player_o_score}`;
-  player_x = 1;
-  player_o = 0;
-  enableBoxes();
-  clearBoxes();
-}
+  const initGameBoard = () => {
+    console.log("Gameboard Intialized");
+    const boxes = document.querySelectorAll(".box");
+    boxes.forEach((box) => {
+      box.addEventListener("click", (e) => {
+        _placeMarker(e.target);
+        _checkForWinner();
+      });
+    });
+  };
 
-function continuePlaying() {
-  player_x = 1;
-  player_o = 0;
-  moveCounter = 0;
-  enableBoxes();
-  clearBoxes();
-}
-
-function disableBoxes() {
-  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
-    boxes[listOfNodes].classList.add("disabled");
-  }
-
-  for (let btns = 0; btns < buttons.length; btns++) {
-    buttons[btns].classList.remove("not-visible");
-    buttons[btns].classList.add("visible");
-  }
-}
-
-function enableBoxes() {
-  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
-    boxes[listOfNodes].classList.remove("disabled");
-  }
-
-  for (let btns = 0; btns < buttons.length; btns++) {
-    buttons[btns].classList.add("not-visible");
-    buttons[btns].classList.remove("visible");
-  }
-}
-
-function clearBoxes() {
-  for (let listOfNodes = 0; listOfNodes < boxes.length; listOfNodes++) {
-    boxes[listOfNodes].textContent = "";
-  }
-  results.textContent = "";
-}
+  initGameBoard();
+})();
