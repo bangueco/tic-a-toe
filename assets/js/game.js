@@ -1,16 +1,56 @@
 const Player = (marker, isTurn) => {
-  let score = 0;
+  let _score = 0;
+
+  const getPlayerScore = () => {
+    return _score;
+  };
+
+  const getMarker = () => {
+    return marker;
+  };
+
+  const incrementPlayerScore = () => {
+    _score += 1;
+  };
 
   return {
-    score,
-    marker,
+    getPlayerScore,
+    incrementPlayerScore,
+    getMarker,
     isTurn,
   };
 };
 
+const DisplayController = (() => {
+  const _results = document.getElementById("results");
+  const _player_x_score = document.getElementById("player_x_score");
+  const _player_o_score = document.getElementById("player_o_score");
+
+  const setMessage = (msg) => {
+    _results.textContent = msg;
+  };
+
+  const setScore = (winner) => {
+    if (winner === "X") {
+      GameBoard.playerOne.incrementPlayerScore();
+      _player_x_score.textContent = `Player X Score: ${GameBoard.playerOne.getPlayerScore()}`;
+    }
+
+    if (winner === "O") {
+      GameBoard.playerTwo.incrementPlayerScore();
+      _player_o_score.textContent = `Player O Score: ${GameBoard.playerTwo.getPlayerScore()}`;
+    }
+  };
+
+  return {
+    setMessage,
+    setScore,
+  };
+})();
+
 const GameBoard = (() => {
-  const _playerOne = Player("X", true);
-  const _playerTwo = Player("O", false);
+  const playerOne = Player("X", true);
+  const playerTwo = Player("O", false);
 
   const _winningConditions = [
     [0, 1, 2],
@@ -20,22 +60,24 @@ const GameBoard = (() => {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 5],
+    [2, 4, 6],
   ];
 
   const _board = ["", "", "", "", "", "", "", "", ""];
 
   const _placeMarker = (box) => {
-    if (_playerOne.isTurn === true) {
-      _board[box.dataset.row] = _playerOne.marker;
-      box.textContent = _playerOne.marker;
-      _playerOne.isTurn = false;
-      _playerTwo.isTurn = true;
+    if (playerOne.isTurn === true) {
+      _board[box.dataset.row] = playerOne.getMarker();
+      box.textContent = playerOne.getMarker();
+      playerOne.isTurn = false;
+      playerTwo.isTurn = true;
+      DisplayController.setMessage("Player O's Turn");
     } else {
-      _board[box.dataset.row] = _playerTwo.marker;
-      box.textContent = _playerTwo.marker;
-      _playerOne.isTurn = true;
-      _playerTwo.isTurn = false;
+      _board[box.dataset.row] = playerTwo.getMarker();
+      box.textContent = playerTwo.getMarker();
+      playerOne.isTurn = true;
+      playerTwo.isTurn = false;
+      DisplayController.setMessage("Player X's Turn");
     }
   };
 
@@ -51,7 +93,8 @@ const GameBoard = (() => {
       }
 
       if (rowA === rowB && rowB === rowC) {
-        alert("Yes?");
+        DisplayController.setMessage(`The winner is ${rowA}`);
+        DisplayController.setScore(rowA);
         break;
       }
     }
@@ -61,12 +104,20 @@ const GameBoard = (() => {
     console.log("Gameboard Intialized");
     const boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
-      box.addEventListener("click", (e) => {
+      box.addEventListener("click", function eventHandler(e) {
         _placeMarker(e.target);
         _checkForWinner();
+        console.log(playerOne.getPlayerScore());
+        this.removeEventListener("click", eventHandler); // remove event listener on clicked box
       });
     });
+    DisplayController.setMessage("Player X's Turn");
   };
 
   initGameBoard();
+
+  return {
+    playerOne,
+    playerTwo,
+  };
 })();
