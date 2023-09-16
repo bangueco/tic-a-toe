@@ -81,6 +81,7 @@ const DisplayController = (() => {
 })();
 
 const GameBoard = (() => {
+  let _roundWin;
   let _move;
 
   const playerOne = Player("X", true);
@@ -128,16 +129,17 @@ const GameBoard = (() => {
         continue;
       }
 
-      if ((rowA === rowB && rowB === rowC) || move === 9) {
+      if (rowA === rowB && rowB === rowC) {
         DisplayController.setMessage(`The winner is ${rowA}`);
         DisplayController.setScore(rowA);
         DisplayController.renderButtons();
         _disableBoxes();
         _clearBoard();
+        _roundWin = true;
         break;
       }
 
-      if (rowA !== rowB && rowB !== rowC && move === 9) {
+      if (!roundWin && move === 9) {
         DisplayController.setMessage(`It's a tie! No one won the game. :(`);
         DisplayController.renderButtons();
         _disableBoxes();
@@ -149,6 +151,7 @@ const GameBoard = (() => {
 
   const initGameBoard = () => {
     move = 0;
+    roundWin = false;
     const boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
       box.addEventListener("click", function eventHandler(e) {
