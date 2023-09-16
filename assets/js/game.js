@@ -128,7 +128,7 @@ const GameBoard = (() => {
         continue;
       }
 
-      if (rowA === rowB && rowB === rowC) {
+      if ((rowA === rowB && rowB === rowC) || move === 9) {
         DisplayController.setMessage(`The winner is ${rowA}`);
         DisplayController.setScore(rowA);
         DisplayController.renderButtons();
