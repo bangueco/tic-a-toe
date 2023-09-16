@@ -81,6 +81,8 @@ const DisplayController = (() => {
 })();
 
 const GameBoard = (() => {
+  let _move;
+
   const playerOne = Player("X", true);
   const playerTwo = Player("O", false);
 
@@ -104,12 +106,14 @@ const GameBoard = (() => {
       playerOne.isTurn = false;
       playerTwo.isTurn = true;
       DisplayController.setMessage("Player O's Turn");
+      move++;
     } else {
       _board[box.dataset.row] = playerTwo.getMarker();
       box.textContent = playerTwo.getMarker();
       playerOne.isTurn = true;
       playerTwo.isTurn = false;
       DisplayController.setMessage("Player X's Turn");
+      move++;
     }
   };
 
@@ -132,11 +136,19 @@ const GameBoard = (() => {
         _clearBoard();
         break;
       }
+
+      if (rowA !== rowB && rowB !== rowC && move === 9) {
+        DisplayController.setMessage(`It's a tie! No one won the game. :(`);
+        DisplayController.renderButtons();
+        _disableBoxes();
+        _clearBoard();
+        break;
+      }
     }
   };
 
   const initGameBoard = () => {
-    console.log("Gameboard Intialized");
+    move = 0;
     const boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
       box.addEventListener("click", function eventHandler(e) {
