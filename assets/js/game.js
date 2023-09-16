@@ -9,13 +9,13 @@ const Player = (marker, isTurn) => {
     return marker;
   };
 
-  const incrementPlayerScore = () => {
+  const addPoints = () => {
     _score += 1;
   };
 
   return {
     getPlayerScore,
-    incrementPlayerScore,
+    addPoints,
     getMarker,
     isTurn,
   };
@@ -25,6 +25,7 @@ const DisplayController = (() => {
   const _results = document.getElementById("results");
   const _player_x_score = document.getElementById("player_x_score");
   const _player_o_score = document.getElementById("player_o_score");
+  const _buttons = document.getElementById("buttons");
 
   const setMessage = (msg) => {
     _results.textContent = msg;
@@ -32,19 +33,50 @@ const DisplayController = (() => {
 
   const setScore = (winner) => {
     if (winner === "X") {
-      GameBoard.playerOne.incrementPlayerScore();
+      GameBoard.playerOne.addPoints();
       _player_x_score.textContent = `Player X Score: ${GameBoard.playerOne.getPlayerScore()}`;
     }
 
     if (winner === "O") {
-      GameBoard.playerTwo.incrementPlayerScore();
+      GameBoard.playerTwo.addPoints();
       _player_o_score.textContent = `Player O Score: ${GameBoard.playerTwo.getPlayerScore()}`;
+    }
+  };
+
+  const _clearBoxes = () => {
+    const boxes = document.querySelectorAll(".box");
+    for (let node = 0; node <= boxes.length - 1; node++) {
+      boxes[node].textContent = "";
+    }
+  };
+
+  const renderButtons = () => {
+    // Render restart button
+    const restartBtn = document.createElement("button");
+    restartBtn.textContent = "Restart";
+    _buttons.appendChild(restartBtn);
+
+    // Render continue button
+    const continueBtn = document.createElement("button");
+    continueBtn.textContent = "Continue";
+    _buttons.appendChild(continueBtn);
+    continueBtn.addEventListener("click", () => {
+      _clearBoxes();
+      _concealButtons();
+      GameBoard.initGameBoard();
+    });
+  };
+
+  const _concealButtons = () => {
+    while (_buttons.firstChild) {
+      _buttons.removeChild(_buttons.firstChild);
     }
   };
 
   return {
     setMessage,
     setScore,
+    renderButtons,
   };
 })();
 
@@ -95,6 +127,9 @@ const GameBoard = (() => {
       if (rowA === rowB && rowB === rowC) {
         DisplayController.setMessage(`The winner is ${rowA}`);
         DisplayController.setScore(rowA);
+        DisplayController.renderButtons();
+        _disableBoxes();
+        _clearBoard();
         break;
       }
     }
@@ -107,11 +142,27 @@ const GameBoard = (() => {
       box.addEventListener("click", function eventHandler(e) {
         _placeMarker(e.target);
         _checkForWinner();
-        console.log(playerOne.getPlayerScore());
         this.removeEventListener("click", eventHandler); // remove event listener on clicked box
       });
     });
-    DisplayController.setMessage("Player X's Turn");
+    if (playerOne.isTurn === true) {
+      DisplayController.setMessage(`Player X Turns`);
+    } else {
+      DisplayController.setMessage(`Player O Turns`);
+    }
+  };
+
+  const _disableBoxes = () => {
+    const boxes = document.querySelectorAll(".box");
+    for (let node = 0; node <= boxes.length - 1; node++) {
+      boxes[node].outerHTML = boxes[node].outerHTML;
+    }
+  };
+
+  const _clearBoard = () => {
+    for (let board = 0; board <= _board.length - 1; board++) {
+      _board[board] = "";
+    }
   };
 
   initGameBoard();
@@ -119,5 +170,6 @@ const GameBoard = (() => {
   return {
     playerOne,
     playerTwo,
+    initGameBoard,
   };
 })();
