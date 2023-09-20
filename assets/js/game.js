@@ -107,14 +107,14 @@ const GameBoard = (() => {
       playerOne.isTurn = false;
       playerTwo.isTurn = true;
       DisplayController.setMessage("Player O's Turn");
-      move++;
+      _move++;
     } else {
       _board[box.dataset.row] = playerTwo.getMarker();
       box.textContent = playerTwo.getMarker();
       playerOne.isTurn = true;
       playerTwo.isTurn = false;
       DisplayController.setMessage("Player X's Turn");
-      move++;
+      _move++;
     }
   };
 
@@ -129,7 +129,7 @@ const GameBoard = (() => {
         continue;
       }
 
-      if (rowA === rowB && rowB === rowC) {
+      if ((rowA === rowB && rowB === rowC) || _move === 9) {
         DisplayController.setMessage(`The winner is ${rowA}`);
         DisplayController.setScore(rowA);
         DisplayController.renderButtons();
@@ -139,7 +139,7 @@ const GameBoard = (() => {
         break;
       }
 
-      if (!roundWin && move === 9) {
+      if (_roundWin === false && _move === 9) {
         DisplayController.setMessage(`It's a tie! No one won the game. :(`);
         DisplayController.renderButtons();
         _disableBoxes();
@@ -150,13 +150,14 @@ const GameBoard = (() => {
   };
 
   const initGameBoard = () => {
-    move = 0;
-    roundWin = false;
+    _move = 0;
+    _roundWin = false;
     const boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
       box.addEventListener("click", function eventHandler(e) {
         _placeMarker(e.target);
         _checkForWinner();
+        console.log(_move);
         this.removeEventListener("click", eventHandler); // remove event listener on clicked box
       });
     });
