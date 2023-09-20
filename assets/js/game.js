@@ -81,8 +81,7 @@ const DisplayController = (() => {
 })();
 
 const GameBoard = (() => {
-  let _roundWin;
-  let _move;
+  let _lastTurn = undefined;
 
   const playerOne = Player("X", true);
   const playerTwo = Player("O", false);
@@ -102,23 +101,24 @@ const GameBoard = (() => {
 
   const _placeMarker = (box) => {
     if (playerOne.isTurn === true) {
+      _lastTurn = "X";
       _board[box.dataset.row] = playerOne.getMarker();
       box.textContent = playerOne.getMarker();
       playerOne.isTurn = false;
       playerTwo.isTurn = true;
       DisplayController.setMessage("Player O's Turn");
-      _move++;
     } else {
+      _lastTurn = "O";
       _board[box.dataset.row] = playerTwo.getMarker();
       box.textContent = playerTwo.getMarker();
       playerOne.isTurn = true;
       playerTwo.isTurn = false;
       DisplayController.setMessage("Player X's Turn");
-      _move++;
     }
   };
 
   const _checkForWinner = () => {
+    let roundWin = false;
     for (let x = 0; x <= _winningConditions.length - 1; x++) {
       const condition = _winningConditions[x];
       const rowA = _board[condition[0]];
@@ -129,35 +129,38 @@ const GameBoard = (() => {
         continue;
       }
 
-      if ((rowA === rowB && rowB === rowC) || _move === 9) {
-        DisplayController.setMessage(`The winner is ${rowA}`);
-        DisplayController.setScore(rowA);
-        DisplayController.renderButtons();
-        _disableBoxes();
-        _clearBoard();
-        _roundWin = true;
+      if (rowA === rowB && rowB === rowC) {
+        roundWin = true;
         break;
       }
+    }
 
-      if (_roundWin === false && _move === 9) {
-        DisplayController.setMessage(`It's a tie! No one won the game. :(`);
-        DisplayController.renderButtons();
-        _disableBoxes();
-        _clearBoard();
-        break;
-      }
+    // Win
+    if (roundWin) {
+      DisplayController.setMessage(`The winner is ${_lastTurn}`);
+      DisplayController.setScore(_lastTurn);
+      DisplayController.renderButtons();
+      _disableBoxes();
+      _clearBoard();
+      return;
+    }
+
+    // Draw
+    if (!_board.includes("")) {
+      DisplayController.setMessage("No one won the game");
+      DisplayController.renderButtons();
+      _disableBoxes();
+      _clearBoard();
+      return;
     }
   };
 
   const initGameBoard = () => {
-    _move = 0;
-    _roundWin = false;
     const boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
       box.addEventListener("click", function eventHandler(e) {
         _placeMarker(e.target);
         _checkForWinner();
-        console.log(_move);
         this.removeEventListener("click", eventHandler); // remove event listener on clicked box
       });
     });
