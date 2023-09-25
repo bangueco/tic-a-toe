@@ -13,10 +13,15 @@ const Player = (marker, isTurn) => {
     _score += 1;
   };
 
+  const resetScore = () => {
+    _score = 0;
+  };
+
   return {
     getPlayerScore,
     addPoints,
     getMarker,
+    resetScore,
     isTurn,
   };
 };
@@ -55,6 +60,15 @@ const DisplayController = (() => {
     const restartBtn = document.createElement("button");
     restartBtn.textContent = "Restart";
     _buttons.appendChild(restartBtn);
+    restartBtn.addEventListener("click", () => {
+      GameBoard.playerOne.resetScore();
+      _player_x_score.textContent = `Player X Score: ${GameBoard.playerOne.getPlayerScore()}`;
+      GameBoard.playerTwo.resetScore();
+      _player_o_score.textContent = `Player O Score: ${GameBoard.playerTwo.getPlayerScore()}`;
+      _clearBoxes();
+      _concealButtons();
+      GameBoard.initGameBoard();
+    });
 
     // Render continue button
     const continueBtn = document.createElement("button");
